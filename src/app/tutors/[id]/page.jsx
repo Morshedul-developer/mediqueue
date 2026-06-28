@@ -10,6 +10,7 @@ import {
   Users,
   ArrowRight,
 } from "lucide-react";
+import { Button } from "@heroui/react";
 
 const TutorDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -132,10 +133,10 @@ const TutorDetailsPage = async ({ params }) => {
 
             {/* Button */}
 
-            <button className="mt-10 flex w-full items-center justify-center gap-3 rounded-2xl bg-primary py-5 text-lg font-semibold text-black transition duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer">
+            <Button className="mt-10 flex w-full items-center justify-center gap-3 rounded-2xl bg-primary py-5 text-lg font-semibold transition duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer">
               Book Session
               <ArrowRight size={20} />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
