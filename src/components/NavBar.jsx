@@ -79,165 +79,118 @@ const NavBar = () => {
           ))}
         </ul>
 
-        {/* Desktop Right */}
-        <div className="hidden items-center gap-4 lg:flex">
-          {user ? (
-            <Dropdown placement="bottom-end">
-              <DropdownTrigger>
-                <div className="cursor-pointer">
-                  <Avatar
-                    isBordered
-                    src={user.image || ""}
-                    name={user.name || "User"}
-                    className="cursor-pointer"
-                  />
-                </div>
-              </DropdownTrigger>
+        {/* Desktop Auth */}
+        {user ? (
+          <div className="hidden items-center gap-3 md:flex">
+            <Avatar size="sm">
+              <Avatar.Image
+                src={user.image}
+                alt={user.name}
+                referrerPolicy="no-referrer"
+              />
+              <Avatar.Fallback>
+                {user.name?.charAt(0)}
+              </Avatar.Fallback>
+            </Avatar>
 
-              <DropdownMenu aria-label="Profile Actions">
-                <DropdownItem
-                  key="profile-info"
-                  textValue="profile-info"
-                  className="h-14 gap-2"
-                >
-                  <p className="font-semibold">{user.name}</p>
-                  <p className="text-xs text-default-500">
-                    {user.email}
-                  </p>
-                </DropdownItem>
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </div>
+        ) : (
+          <div className="hidden items-center gap-4 md:flex">
+            <Link
+              href="/login"
+              className="rounded-xl border border-gray-300 px-4 py-2 text-gray-700 transition hover:bg-gray-100"
+            >
+              Login
+            </Link>
 
-                <DropdownItem
-                  key="profile"
-                  onPress={() => router.push("/my-profile")}
-                >
-                  My Profile
-                </DropdownItem>
+            <Link
+              href="/register"
+              className="rounded-xl bg-[#FBBF24] px-4 py-2 font-medium text-[#6C4F00] transition hover:bg-[#f5b70a]"
+            >
+              Register
+            </Link>
+          </div>
+        )}
 
-                <DropdownItem
-                  key="logout"
-                  color="danger"
-                  onPress={handleLogout}
-                >
-                  Logout
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          ) : (
-            <>
-              <Link href="/login">
-              <Button
-                
-                variant="bordered"
-              >
-                Login
-              </Button>
-              </Link>
-              <Link href="/register">
-              <Button
-                
-                variant="primary"
-              >
-                Register
-              </Button>
-              </Link>
-
-              
-            </>
-          )}
-        </div>
-
-        {/* Mobile Button */}
+        {/* Mobile Menu Button */}
         <button
+          className="text-2xl md:hidden"
           onClick={() => setOpen(!open)}
-          className="text-3xl lg:hidden"
         >
-          {open ? <HiXMark /> : <HiBars3 />}
+          ☰
         </button>
       </div>
 
       {/* Mobile Menu */}
       {open && (
-        <div className="border-t bg-white lg:hidden">
-          <div className="space-y-2 px-5 py-5">
-            {navLinks.map((item) => (
+        <div className="space-y-4 border-t bg-white px-4 pb-4 md:hidden">
+          {/* Mobile Links */}
+          <div className="flex flex-col items-center gap-3">
+            {navLinks.map((link) => (
               <Link
-                key={item.link}
-                href={item.link}
+                key={link.link}
+                href={link.link}
                 onClick={() => setOpen(false)}
-                className={`block rounded-lg px-3 py-2 transition
-                  ${
-                    pathname === item.link
-                      ? "bg-primary text-white"
-                      : "hover:bg-default-100"
-                  }`}
+                className={
+                  pathname === link.link
+                    ? "font-semibold text-[#6C4F00]"
+                    : "text-gray-700"
+                }
               >
-                {item.name}
+                {link.name}
               </Link>
             ))}
+          </div>
 
-            <div className="mt-4 border-t pt-4">
-              {user ? (
-                <>
-                  <div className="mb-4 flex items-center gap-3">
-                    <Avatar
-                      src={user.image || ""}
-                      name={user.name || "User"}
-                    />
+          {/* Mobile Auth */}
+          <div className="border-t pt-3">
+            {user ? (
+              <div className="flex items-center justify-center gap-3">
+                <Avatar size="sm">
+                  <Avatar.Image
+                    src={user.image}
+                    alt={user.name}
+                    referrerPolicy="no-referrer"
+                  />
+                  <Avatar.Fallback>
+                    {user.name?.charAt(0)}
+                  </Avatar.Fallback>
+                </Avatar>
 
-                    <div>
-                      <p className="font-semibold">
-                        {user.name}
-                      </p>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="rounded-xl border border-gray-300 px-4 py-2 text-center"
+                >
+                  Login
+                </Link>
 
-                      <p className="text-xs text-gray-500">
-                        {user.email}
-                      </p>
-                    </div>
-                  </div>
-
-                  <Button
-                    as={Link}
-                    href="/my-profile"
-                    className="mb-3 w-full"
-                    variant="bordered"
-                    onPress={() => setOpen(false)}
-                  >
-                    My Profile
-                  </Button>
-
-                  <Button
-                    color="danger"
-                    className="w-full"
-                    onPress={handleLogout}
-                  >
-                    Logout
-                  </Button>
-                </>
-              ) : (
-                <div className="space-y-3">
-                  <Link href="/login">
-                  <Button
-                    
-                    variant="bordered"
-                    className="w-full"
-                    onPress={() => setOpen(false)}
-                  >
-                    Login
-                  </Button>
-                  </Link>
-
-                  <Link href="/register">
-                  <Button
-                    variant="primary"
-                    className="w-full"
-                    onPress={() => setOpen(false)}
-                  >
-                    Register
-                  </Button>
-                  </Link>
-                </div>
-              )}
-            </div>
+                <Link
+                  href="/register"
+                  onClick={() => setOpen(false)}
+                  className="rounded-xl bg-[#FBBF24] px-4 py-2 text-center text-[#6C4F00]"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
