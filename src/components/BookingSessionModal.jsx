@@ -12,7 +12,7 @@ import {
 } from "@heroui/react";
 import { ArrowRight } from "lucide-react";
 
-export default function BookingSessionModal({ tutor }) {
+export default function BookingSessionModal({ tutor, fetchTutors }) {
   const { data } = authClient.useSession();
   const user = data?.user;
 
@@ -45,14 +45,23 @@ export default function BookingSessionModal({ tutor }) {
     if (data.insertedId) {
       alert("Session Booked Successfully");
       form.reset();
+      fetchTutors();
     }
   };
 
   return (
     <Modal>
       {/* Trigger */}
-      <Button className="mt-10 flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-primary py-5 text-lg font-semibold transition hover:scale-[1.02] hover:shadow-xl">
-        Book Session
+      <Button
+        disabled={tutor.totalSlot === 0}
+        className={`mt-10 flex w-full items-center justify-center gap-3 rounded-2xl py-5 text-lg font-semibold transition
+    ${
+      tutor.totalSlot === 0
+        ? "cursor-not-allowed bg-gray-300 text-gray-500"
+        : "cursor-pointer bg-primary hover:scale-[1.02] hover:shadow-xl"
+    }`}
+      >
+        {tutor.totalSlot === 0 ? "No Slot Available" : "Book Session"}
         <ArrowRight size={20} />
       </Button>
 

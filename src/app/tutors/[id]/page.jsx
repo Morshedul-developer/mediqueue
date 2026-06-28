@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   CalendarDays,
@@ -10,11 +12,30 @@ import {
 } from "lucide-react";
 import { Button } from "@heroui/react";
 import BookingSessionModal from "@/components/BookingSessionModal";
+import { useEffect, useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { useParams } from "next/navigation";
+import { Alert } from "@heroui/react";
 
-const TutorDetailsPage = async ({ params }) => {
-  const { id } = await params;
-  const res = await fetch(`http://localhost:5000/tutors/${id}`);
-  const tutor = await res.json();
+const TutorDetailsPage = () => {
+  const { id } = useParams();
+  const { data } = authClient.useSession();
+  const user = data?.user;
+
+  const [tutor, setTutor] = useState([]);
+
+  const fetchTutors = async () => {
+    const res = await fetch(`http://localhost:5000/tutors/${id}`);
+    const data = await res.json();
+    setTutor(data);
+  };
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchTutors();
+    }
+  }, [user?.email]);
+
   return (
     <section className="bg-linear-to-b from-slate-50 to-white py-14">
       <div className="mx-auto max-w-7xl px-5">
@@ -130,9 +151,18 @@ const TutorDetailsPage = async ({ params }) => {
               </h3>
             </div>
 
+            {tutor.totalSlot === 0 && (
+              <Alert className="mt-6" status="danger">
+                <Alert.Indicator />
+                <Alert.Content >
+                  <Alert.Title >Sorry! This session is fully booked. You can’t join at the moment.</Alert.Title>
+                </Alert.Content>
+              </Alert>
+            )}
+
             {/* Button */}
 
-            <BookingSessionModal tutor={tutor} />
+            <BookingSessionModal tutor={tutor} fetchTutors={fetchTutors} />
           </div>
         </div>
       </div>
