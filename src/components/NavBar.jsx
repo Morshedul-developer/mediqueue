@@ -124,21 +124,24 @@ const NavBar = () => {
             </Dropdown>
           ) : (
             <>
+              <Link href="/login">
               <Button
-                as={Link}
-                href="/login"
+                
                 variant="bordered"
               >
                 Login
               </Button>
-
+              </Link>
+              <Link href="/register">
               <Button
-                as={Link}
-                href="/register"
-                color="primary"
+                
+                variant="primary"
               >
                 Register
               </Button>
+              </Link>
+
+              
             </>
           )}
         </div>
@@ -212,25 +215,26 @@ const NavBar = () => {
                 </>
               ) : (
                 <div className="space-y-3">
+                  <Link href="/login">
                   <Button
-                    as={Link}
-                    href="/login"
+                    
                     variant="bordered"
                     className="w-full"
                     onPress={() => setOpen(false)}
                   >
                     Login
                   </Button>
+                  </Link>
 
+                  <Link href="/register">
                   <Button
-                    as={Link}
-                    href="/register"
-                    color="primary"
+                    variant="primary"
                     className="w-full"
                     onPress={() => setOpen(false)}
                   >
                     Register
                   </Button>
+                  </Link>
                 </div>
               )}
             </div>
