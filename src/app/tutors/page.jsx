@@ -13,7 +13,7 @@ export default function TutorsPage() {
 
   const fetchTutors = async () => {
     const res = await fetch(
-      `${NEXT_PUBLIC_SERVER_URL}/tutors?search=${search}&startDate=${startDate}&endDate=${endDate}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors?search=${search}&startDate=${startDate}&endDate=${endDate}`,
     );
 
     const data = await res.json();

@@ -17,7 +17,7 @@ const MyBookedSessionsPage = () => {
 
     const { data: tokenData } = await authClient.token();
     const res = await fetch(
-      `${NEXT_PUBLIC_SERVER_URL}/myBookedSessions?email=${user.email}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/myBookedSessions?email=${user.email}`,
       {
         headers: {
           authorization: `Bearer ${tokenData.token}`,
@@ -36,7 +36,7 @@ const MyBookedSessionsPage = () => {
 
   const handleCancelBooking = async (id) => {
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/myBookedSessions/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/myBookedSessions/${id}`, {
       method: "PATCH",
       authorization: `Bearer ${tokenData.token}`,
     });
