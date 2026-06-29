@@ -1,26 +1,80 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import TutorCard from "@/components/ui/TutorCard";
 
-export const metadata = {
-  title: "Tutors",
-};
+export default function TutorsPage() {
+  const [tutors, setTutors] = useState([]);
+  const [search, setSearch] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-const TutorsPage = async () => {
-  const res = await fetch(`http://localhost:5000/tutors`);
-  const tutors = await res.json();
+  const fetchTutors = async () => {
+    const res = await fetch(
+      `http://localhost:5000/tutors?search=${search}&startDate=${startDate}&endDate=${endDate}`
+    );
+
+    const data = await res.json();
+
+    setTutors(data);
+  };
+
+  useEffect(() => {
+    fetchTutors();
+  }, [search, startDate, endDate]);
+
   return (
-    <section className="max-w-7xl mx-auto space-y-10 px-4 md:px-0 my-20">
-      <div className="animate__animated animate__fadeInDown">
-        <h3 className="text-2xl md:text-5xl font-bold text-center">
-          All Tutors
-        </h3>
+    <section className="max-w-7xl mx-auto my-20 px-4">
+
+      <h1 className="mb-10 text-center text-5xl font-bold">
+        All Tutors
+      </h1>
+
+      {/* Search & Filter */}
+
+      <div className="mb-10 grid gap-4 md:grid-cols-4">
+
+        <input
+          type="text"
+          placeholder="Search Tutor..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="rounded-lg border p-3"
+        />
+
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          className="rounded-lg border p-3"
+        />
+
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="rounded-lg border p-3"
+        />
+
+        <button
+          onClick={() => {
+            setSearch("");
+            setStartDate("");
+            setEndDate("");
+          }}
+          className="rounded-lg bg-primary text-white"
+        >
+          Reset
+        </button>
+
       </div>
+
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tutors.map((tutor) => (
           <TutorCard key={tutor._id} tutor={tutor} />
         ))}
       </div>
+
     </section>
   );
-};
-
-export default TutorsPage;
+}
