@@ -15,7 +15,7 @@ const MyTutorsPage = () => {
   const fetchTutors = async () => {
     const { data: tokenData } = await authClient.token();
     const res = await fetch(
-      `http://localhost:5000/myAddedTutors?email=${user?.email}`,
+      `${NEXT_PUBLIC_SERVER_URL}/myAddedTutors?email=${user?.email}`,
       {
         headers: {
           authorization: `Bearer ${tokenData?.token}`,

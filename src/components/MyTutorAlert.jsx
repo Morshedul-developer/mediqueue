@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export function MyTutorAlert({ tutor, fetchTutors }) {
   const handleDelete = async (id) => {
     const {data:tokenData} = await authClient.token();
-    const res = await fetch(`http://localhost:5000/myAddedTutors/${id}`, {
+    const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/myAddedTutors/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${tokenData.token}`

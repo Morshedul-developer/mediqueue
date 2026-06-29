@@ -47,7 +47,7 @@ export default function BookingSessionModal({ tutor, fetchTutors }) {
     };
 
     const {data:tokenData} = await authClient.token();
-    const res = await fetch("http://localhost:5000/bookSession", {
+    const res = await fetch(`${NEXT_PUBLIC_SERVER_URL}/bookSession`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
