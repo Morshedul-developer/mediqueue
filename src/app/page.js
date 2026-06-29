@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import AvailableTutors from "@/components/AvailableTutors";
 import WhyChooseUs from "@/components/WhyChoose";
+import LearningJourney from "@/components/LearningJourney";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
     <Banner/>
     <AvailableTutors/>
     <WhyChooseUs/>
+    <LearningJourney/>
     </>
   );
 }
