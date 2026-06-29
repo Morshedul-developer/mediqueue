@@ -13,8 +13,13 @@ const user = data?.user;
 const [tutors, setTutors] = useState([]);
 
 const fetchTutors = async () => {
+  const {data:tokenData} = await authClient.token();
   const res = await fetch(
-    `http://localhost:5000/myAddedTutors?email=${user?.email}`
+    `http://localhost:5000/myAddedTutors?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${tokenData?.token}`
+      }
+    }
   );
 
   const data = await res.json();

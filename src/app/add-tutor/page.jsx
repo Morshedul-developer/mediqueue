@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 const AddTutorPage = () => {
   const { data } = authClient.useSession();
   const user = data?.user;
+  
   const handleAddTutor = async (e) => {
     e.preventDefault();
 
@@ -42,15 +43,17 @@ const AddTutorPage = () => {
       createdAt: new Date(),
     };
 
+    const {data:tokenData} = await authClient.token();
     const res = await fetch(`http://localhost:5000/addMyTutor`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`
       },
       body: JSON.stringify(tutorData),
     });
     const data = await res.json();
-    console.log(data);
+
     if (data.insertedId) {
       toast.success("Tutor added successfully!");
       form.reset();
