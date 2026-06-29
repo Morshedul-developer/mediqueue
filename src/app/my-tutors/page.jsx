@@ -1,37 +1,35 @@
 "use client";
-import { Button } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import MyTutorEditModal from "@/components/MyTutorEditModal";
-import { toast } from "react-toastify";
 import { MyTutorAlert } from "@/components/MyTutorAlert";
 
 const MyTutorsPage = () => {
   const { data } = authClient.useSession();
-const user = data?.user;
+  const user = data?.user;
 
-const [tutors, setTutors] = useState([]);
+  const [tutors, setTutors] = useState([]);
 
-const fetchTutors = async () => {
-  const {data:tokenData} = await authClient.token();
-  const res = await fetch(
-    `http://localhost:5000/myAddedTutors?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${tokenData?.token}`
-      }
+  const fetchTutors = async () => {
+    const { data: tokenData } = await authClient.token();
+    const res = await fetch(
+      `http://localhost:5000/myAddedTutors?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+      },
+    );
+
+    const data = await res.json();
+    setTutors(data);
+  };
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchTutors();
     }
-  );
-
-  const data = await res.json();
-  setTutors(data);
-};
-
-useEffect(() => {
-  if (user?.email) {
-    fetchTutors();
-  }
-}, [user?.email]);
-
+  }, [user?.email]);
 
   return (
     <section className="max-w-7xl mx-auto px-5 py-14">
@@ -111,12 +109,9 @@ useEffect(() => {
 
                 <td className="px-6 py-5">
                   <div className="flex items-center justify-center gap-3">
-                    
-                        <MyTutorEditModal tutor={tutor} fetchTutors={fetchTutors}/>
-                      
-                    
-                      <MyTutorAlert tutor={tutor} fetchTutors={fetchTutors} />
-                    
+                    <MyTutorEditModal tutor={tutor} fetchTutors={fetchTutors} />
+
+                    <MyTutorAlert tutor={tutor} fetchTutors={fetchTutors} />
                   </div>
                 </td>
               </tr>

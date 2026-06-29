@@ -24,7 +24,12 @@ const TutorDetailsPage = () => {
   const [tutor, setTutor] = useState([]);
 
   const fetchTutors = async () => {
-    const res = await fetch(`http://localhost:5000/tutors/${id}`);
+    const {data:tokenData} = await authClient.token();
+    const res = await fetch(`http://localhost:5000/tutors/${id}`,{
+      headers: {
+        authorization: `Bearer ${tokenData.token}`
+      }
+    });
     const data = await res.json();
     setTutor(data);
   };

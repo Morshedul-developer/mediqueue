@@ -3,6 +3,7 @@
 import { Pencil } from "lucide-react";
 import { Button, Form, Label, Modal, Surface } from "@heroui/react";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 export default function MyTutorEditModal({ tutor, fetchTutors }) {
   const handleUpdateTutor = async (e, id) => {
@@ -25,10 +26,12 @@ export default function MyTutorEditModal({ tutor, fetchTutors }) {
       teachingMode: form.teachingMode.value,
     };
 
+    const {data:tokenData} = await authClient.token();
     const res = await fetch(`http://localhost:5000/myAddedTutors/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${tokenData.token}`
       },
       body: JSON.stringify(updatedTutor),
     });

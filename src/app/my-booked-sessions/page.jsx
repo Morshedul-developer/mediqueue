@@ -14,8 +14,13 @@ const MyBookedSessionsPage = () => {
   const fetchBookings = async () => {
     if (!user?.email) return;
 
+    const {data:tokenData} = await authClient.token();
     const res = await fetch(
-      `http://localhost:5000/myBookedSessions?email=${user.email}`
+      `http://localhost:5000/myBookedSessions?email=${user.email}`,{
+        headers: {
+          authorization: `Bearer ${tokenData.token}`
+        }
+      }
     );
 
     const data = await res.json();
@@ -27,10 +32,13 @@ const MyBookedSessionsPage = () => {
   }, [user?.email]);
 
   const handleCancelBooking = async (id) => {
+
+    const {data:tokenData} = await authClient.token();
     const res = await fetch(
       `http://localhost:5000/myBookedSessions/${id}`,
       {
         method: "PATCH",
+        authorization: `Bearer ${tokenData.token}`
       }
     );
 
@@ -54,7 +62,7 @@ const MyBookedSessionsPage = () => {
       </div>
 
       <div className="overflow-x-auto rounded-3xl border border-gray-200 bg-white shadow-sm">
-        <table className="w-full min-w-[900px]">
+        <table className="w-full min-w-225">
           <thead className="border-b bg-gray-50">
             <tr className="text-left text-gray-700">
               <th className="px-6 py-5 font-semibold">Name</th>
