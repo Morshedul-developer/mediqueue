@@ -13,6 +13,7 @@ import {
   User,
   Users,
 } from "lucide-react";
+import { toast } from "react-toastify";
 
 const AddTutorPage = () => {
   const { data } = authClient.useSession();
@@ -50,7 +51,7 @@ const AddTutorPage = () => {
     const data = await res.json();
     console.log(data);
     if (data.insertedId) {
-      alert("Tutor added successfully!");
+      toast.success("Tutor added successfully!");
       form.reset();
     }
   };

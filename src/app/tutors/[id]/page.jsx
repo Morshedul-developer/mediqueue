@@ -154,7 +154,7 @@ const TutorDetailsPage = () => {
               <Alert className="mt-6" status="danger">
                 <Alert.Indicator />
                 <Alert.Content >
-                  <Alert.Title >Sorry! This session is fully booked. You can’t join at the moment.</Alert.Title>
+                  <Alert.Title >Booking is not available yet for this tutor.</Alert.Title>
                 </Alert.Content>
               </Alert>
             )}

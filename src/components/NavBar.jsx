@@ -4,15 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
-import {
-  Avatar,
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@heroui/react";
-import { HiBars3, HiXMark } from "react-icons/hi2";
+import { Avatar, Button } from "@heroui/react";
 
 const links = [
   { name: "Home", link: "/" },
@@ -35,9 +27,7 @@ const NavBar = () => {
   const { data } = authClient.useSession();
   const user = data?.user;
 
-  const navLinks = user
-    ? links
-    : links.filter((item) => !item.private);
+  const navLinks = user ? links : links.filter((item) => !item.private);
 
   const handleLogout = async () => {
     await authClient.signOut();
@@ -88,16 +78,10 @@ const NavBar = () => {
                 alt={user.name}
                 referrerPolicy="no-referrer"
               />
-              <Avatar.Fallback>
-                {user.name?.charAt(0)}
-              </Avatar.Fallback>
+              <Avatar.Fallback>{user.name?.charAt(0)}</Avatar.Fallback>
             </Avatar>
 
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={handleLogout}
-            >
+            <Button variant="danger" size="sm" onClick={handleLogout}>
               Logout
             </Button>
           </div>
@@ -112,7 +96,7 @@ const NavBar = () => {
 
             <Link
               href="/register"
-              className="rounded-xl bg-[#FBBF24] px-4 py-2 font-medium text-[#6C4F00] transition hover:bg-[#f5b70a]"
+              className="rounded-xl px-4 py-2 font-medium text-white transition bg-blue-500 hover:bg-blue-700"
             >
               Register
             </Link>
@@ -120,10 +104,7 @@ const NavBar = () => {
         )}
 
         {/* Mobile Menu Button */}
-        <button
-          className="text-2xl md:hidden"
-          onClick={() => setOpen(!open)}
-        >
+        <button className="text-2xl md:hidden" onClick={() => setOpen(!open)}>
           ☰
         </button>
       </div>
@@ -159,16 +140,10 @@ const NavBar = () => {
                     alt={user.name}
                     referrerPolicy="no-referrer"
                   />
-                  <Avatar.Fallback>
-                    {user.name?.charAt(0)}
-                  </Avatar.Fallback>
+                  <Avatar.Fallback>{user.name?.charAt(0)}</Avatar.Fallback>
                 </Avatar>
 
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={handleLogout}
-                >
+                <Button variant="danger" size="sm" onClick={handleLogout}>
                   Logout
                 </Button>
               </div>
@@ -185,7 +160,7 @@ const NavBar = () => {
                 <Link
                   href="/register"
                   onClick={() => setOpen(false)}
-                  className="rounded-xl bg-[#FBBF24] px-4 py-2 text-center text-[#6C4F00]"
+                  className="rounded-xl px-4 py-2 font-medium text-white transition bg-blue-500 hover:bg-blue-700 text-center"
                 >
                   Register
                 </Link>
