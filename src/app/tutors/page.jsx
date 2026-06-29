@@ -2,21 +2,24 @@
 
 import { useEffect, useState } from "react";
 import TutorCard from "@/components/ui/TutorCard";
+import { Spinner } from "@heroui/react";
 
 export default function TutorsPage() {
   const [tutors, setTutors] = useState([]);
   const [search, setSearch] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchTutors = async () => {
     const res = await fetch(
-      `http://localhost:5000/tutors?search=${search}&startDate=${startDate}&endDate=${endDate}`
+      `http://localhost:5000/tutors?search=${search}&startDate=${startDate}&endDate=${endDate}`,
     );
 
     const data = await res.json();
 
     setTutors(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -25,15 +28,11 @@ export default function TutorsPage() {
 
   return (
     <section className="max-w-7xl mx-auto my-20 px-4">
-
-      <h1 className="mb-10 text-center text-5xl font-bold">
-        All Tutors
-      </h1>
+      <h1 className="mb-10 text-center text-5xl font-bold">All Tutors</h1>
 
       {/* Search & Filter */}
 
       <div className="mb-10 grid gap-4 md:grid-cols-4">
-
         <input
           type="text"
           placeholder="Search Tutor..."
@@ -66,15 +65,20 @@ export default function TutorsPage() {
         >
           Reset
         </button>
-
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {tutors.map((tutor) => (
-          <TutorCard key={tutor._id} tutor={tutor} />
-        ))}
+      {loading ? (
+        <div className="flex flex-col items-center gap-2">
+        <Spinner size="xl" />
+        <span className="text-xs text-muted">Loading</span>
       </div>
-
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {tutors.map((tutor) => (
+            <TutorCard key={tutor._id} tutor={tutor} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

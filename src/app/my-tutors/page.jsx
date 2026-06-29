@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import MyTutorEditModal from "@/components/MyTutorEditModal";
 import { MyTutorAlert } from "@/components/MyTutorAlert";
+import { Spinner } from "@heroui/react";
 
 const MyTutorsPage = () => {
+  const [loading, setLoading] = useState(true);
   const { data } = authClient.useSession();
   const user = data?.user;
 
@@ -23,6 +25,7 @@ const MyTutorsPage = () => {
 
     const data = await res.json();
     setTutors(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -39,85 +42,97 @@ const MyTutorsPage = () => {
         <p className="mt-2 text-gray-500">Manage all your published tutors.</p>
       </div>
 
-      <div className="overflow-x-auto rounded-3xl border bg-white shadow-lg">
-        <table className="w-full">
-          <thead className="bg-slate-50">
-            <tr className="text-left">
-              <th className="px-6 py-5">Tutor Name</th>
+      {
+        loading ? (
+          <div className="flex flex-col items-center gap-2 mt-4">
+            <Spinner size="xl" />
+            <span className="text-xs text-muted">Loading</span>
+          </div>
+        ) : 
+        <div className="overflow-x-auto rounded-3xl border bg-white shadow-lg">
+        
+          <table className="w-full">
+            <thead className="bg-slate-50">
+              <tr className="text-left">
+                <th className="px-6 py-5">Tutor Name</th>
 
-              <th className="px-6 py-5">Subject</th>
+                <th className="px-6 py-5">Subject</th>
 
-              <th className="px-6 py-5">Available</th>
+                <th className="px-6 py-5">Available</th>
 
-              <th className="px-6 py-5">Hourly Fee</th>
+                <th className="px-6 py-5">Hourly Fee</th>
 
-              <th className="px-6 py-5">Slot</th>
+                <th className="px-6 py-5">Slot</th>
 
-              <th className="px-6 py-5">Registration Date</th>
+                <th className="px-6 py-5">Registration Date</th>
 
-              <th className="px-6 py-5 text-center">Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {tutors.map((tutor) => (
-              <tr
-                key={tutor._id}
-                className="border-t hover:bg-slate-50 transition"
-              >
-                {/* Tutor */}
-
-                <td className="px-6 py-5">
-                  <h2 className="font-semibold">{tutor.tutorName}</h2>
-                </td>
-
-                {/* Subject */}
-
-                <td className="px-6 py-5">{tutor.subject}</td>
-
-                {/* Available */}
-
-                <td className="px-6 py-5">
-                  <div>
-                    <p>{tutor.availableDays}</p>
-
-                    <p className="text-sm text-gray-500">
-                      {tutor.availableTime}
-                    </p>
-                  </div>
-                </td>
-
-                {/* Fee */}
-
-                <td className="px-6 py-5 font-semibold text-primary">
-                  ${tutor.hourlyFee}
-                </td>
-
-                {/* Slot */}
-
-                <td className="px-6 py-5">
-                  <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700">
-                    {tutor.totalSlot}
-                  </span>
-                </td>
-
-                {/* Date */}
-
-                <td className="px-6 py-5">{tutor.sessionStartDate}</td>
-
-                {/* Action */}
-
-                <td className="px-6 py-5">
-                  <div className="flex items-center justify-center gap-3">
-                    <MyTutorEditModal tutor={tutor} fetchTutors={fetchTutors} />
-
-                    <MyTutorAlert tutor={tutor} fetchTutors={fetchTutors} />
-                  </div>
-                </td>
+                <th className="px-6 py-5 text-center">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {tutors.map((tutor) => (
+                <tr
+                  key={tutor._id}
+                  className="border-t hover:bg-slate-50 transition"
+                >
+                  {/* Tutor */}
+
+                  <td className="px-6 py-5">
+                    <h2 className="font-semibold">{tutor.tutorName}</h2>
+                  </td>
+
+                  {/* Subject */}
+
+                  <td className="px-6 py-5">{tutor.subject}</td>
+
+                  {/* Available */}
+
+                  <td className="px-6 py-5">
+                    <div>
+                      <p>{tutor.availableDays}</p>
+
+                      <p className="text-sm text-gray-500">
+                        {tutor.availableTime}
+                      </p>
+                    </div>
+                  </td>
+
+                  {/* Fee */}
+
+                  <td className="px-6 py-5 font-semibold text-primary">
+                    ${tutor.hourlyFee}
+                  </td>
+
+                  {/* Slot */}
+
+                  <td className="px-6 py-5">
+                    <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700">
+                      {tutor.totalSlot}
+                    </span>
+                  </td>
+
+                  {/* Date */}
+
+                  <td className="px-6 py-5">{tutor.sessionStartDate}</td>
+
+                  {/* Action */}
+
+                  <td className="px-6 py-5">
+                    <div className="flex items-center justify-center gap-3">
+                      <MyTutorEditModal
+                        tutor={tutor}
+                        fetchTutors={fetchTutors}
+                      />
+
+                      <MyTutorAlert tutor={tutor} fetchTutors={fetchTutors} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        
 
         {tutors.length === 0 && (
           <div className="py-20 text-center">
@@ -129,6 +144,7 @@ const MyTutorsPage = () => {
           </div>
         )}
       </div>
+      }
     </section>
   );
 };
