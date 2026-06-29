@@ -3,7 +3,9 @@ import { FaArrowRight } from "react-icons/fa";
 import TutorCard from "./ui/TutorCard";
 
 const PopularProducts = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-tutors`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-tutors`,{
+    cache: "no-store"
+  });
   const tutors = await res.json();
   return (
     <section className="max-w-7xl mx-auto space-y-10 px-4 md:px-0 py-10 md:my-15">
