@@ -8,29 +8,33 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "animate.css";
-import { Chip } from "@heroui/react";
+import { Button, Chip } from "@heroui/react";
+import Link from "next/link";
 
 const banners = [
   {
     id: 1,
-    title: "Summer Sale 2026",
-    subtitle: "Up to 50% Off on Fashion & Electronics",
+    title: "Find Your Perfect Tutor",
+    subtitle:
+      "Connect with experienced tutors and start your personalized learning journey today.",
     image:
-      "https://res.cloudinary.com/dsgnat4bt/image/upload/q_auto/f_auto/v1781959893/photo-1607082348824-0a96f2a4b9da_xjuwgi.jpg",
+      "https://res.cloudinary.com/dsgnat4bt/image/upload/v1782692627/photo-1513258496099-48168024aec0_dfc81d.jpg",
   },
   {
     id: 2,
-    title: "New Arrivals",
-    subtitle: "Latest trending products just for you",
+    title: "Learn Anytime, Anywhere",
+    subtitle:
+      "Book one-to-one sessions with expert tutors at your preferred time and pace.",
     image:
-      "https://res.cloudinary.com/dsgnat4bt/image/upload/v1782209044/photo-1580793241553-e9f1cce181af_zgwmox.jpg",
+      "https://res.cloudinary.com/dsgnat4bt/image/upload/v1782692691/photo-1499750310107-5fef28a66643_zwhhza.jpg",
   },
   {
     id: 3,
-    title: "Best Deals",
-    subtitle: "Shop smart & save more every day",
+    title: "Achieve Your Academic Goals",
+    subtitle:
+      "Boost your confidence, improve your skills, and succeed with professional guidance.",
     image:
-      "https://res.cloudinary.com/dsgnat4bt/image/upload/q_auto/f_auto/v1781960007/photo-1556740749-887f6717d7e4_dqkaqj.jpg",
+      "https://res.cloudinary.com/dsgnat4bt/image/upload/v1782692682/photo-1622295023876-0cdf583c41f6_lwgtws.jpg",
   },
 ];
 
@@ -59,11 +63,15 @@ export default function Banner() {
                 <div className="max-w-7xl mx-auto px-6 text-white">
                   {activeIndex === index && (
                     <>
-                      <Chip color="warning" variant="primary" className="font-semibold mb-2 animate__animated animate__fadeInDown">
-                        Exclusive Offer
+                      <Chip
+                        color="success"
+                        variant="solid"
+                        className="mb-2 animate__animated animate__fadeInDown font-semibold"
+                      >
+                        Trusted Learning Platform
                       </Chip>
 
-                      <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold max-w-2xl animate__animated animate__fadeInLeft">
+                      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold max-w-2xl animate__animated animate__fadeInLeft">
                         {banner.title}
                       </h1>
 
@@ -71,9 +79,11 @@ export default function Banner() {
                         {banner.subtitle}
                       </p>
 
-                      <button className="mt-6 bg-[#FBBF24] text-[#6C4F00] px-5 py-2 md:px-6 md:py-3 rounded-xl font-semibold hover:scale-105 transition cursor-pointer">
-                        Shop Now
-                      </button>
+                      <Link href="/tutors">
+                        <Button className="mt-6 cursor-pointer rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:scale-105">
+                          Explore Tutors
+                        </Button>
+                      </Link>
                     </>
                   )}
                 </div>
