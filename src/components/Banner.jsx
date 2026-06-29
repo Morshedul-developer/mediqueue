@@ -64,7 +64,7 @@ export default function Banner() {
                   {activeIndex === index && (
                     <>
                       <Chip
-                        color="success"
+                        color="accent"
                         variant="solid"
                         className="mb-2 animate__animated animate__fadeInDown font-semibold"
                       >
