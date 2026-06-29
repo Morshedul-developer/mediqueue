@@ -4,10 +4,6 @@ import Link from "next/link";
 import { Button } from "@heroui/react";
 import { Home, SearchX } from "lucide-react";
 
-export const metadata = {
-  title: "404 - Page Not Found | MediQueue",
-};
-
 export default function NotFound() {
   return (
     <section className="flex min-h-screen items-center justify-center bg-linear-to-br from-blue-50 via-white to-indigo-50 px-6">

@@ -3,7 +3,6 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
-import Providers from "@/providers";
 
 const InterFont = Inter({
   subsets: ["latin"],
@@ -24,12 +23,10 @@ export default function RootLayout({ children }) {
       className={`${InterFont.className} h-full antialiased`}
     >
       <body>
-        <Providers>
           <NavBar />
           {children}
           <Footer />
           <ToastContainer position="bottom-right" autoClose={3000} />
-        </Providers>
       </body>
     </html>
   );
