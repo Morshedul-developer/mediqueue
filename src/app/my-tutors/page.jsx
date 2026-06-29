@@ -1,9 +1,10 @@
 "use client";
-import { Trash2 } from "lucide-react";
 import { Button } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import MyTutorEditModal from "@/components/MyTutorEditModal";
+import { toast } from "react-toastify";
+import { MyTutorAlert } from "@/components/MyTutorAlert";
 
 const MyTutorsPage = () => {
   const { data } = authClient.useSession();
@@ -26,20 +27,7 @@ useEffect(() => {
   }
 }, [user?.email]);
 
-const handleDelete = async (id) => {
-  const res = await fetch(`http://localhost:5000/myAddedTutors/${id}`, {
-    method: "DELETE",
-  });
 
-  const data = await res.json();
-
-  console.log(data);
-
-  if (data.deletedCount > 0) {
-    alert("Tutor Deleted Successfully");
-    fetchTutors();
-  }
-};
   return (
     <section className="max-w-7xl mx-auto px-5 py-14">
       <div className="mb-8">
@@ -122,10 +110,8 @@ const handleDelete = async (id) => {
                         <MyTutorEditModal tutor={tutor} fetchTutors={fetchTutors}/>
                       
                     
-
-                    <Button onClick={() => handleDelete(tutor._id)} className="rounded-full bg-red-100 text-red-600 h-10 w-10 transition hover:bg-red-600 hover:text-white">
-                      <Trash2 size={18} />
-                    </Button>
+                      <MyTutorAlert tutor={tutor} fetchTutors={fetchTutors} />
+                    
                   </div>
                 </td>
               </tr>

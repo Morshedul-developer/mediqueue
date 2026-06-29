@@ -2,6 +2,7 @@
 
 import { Pencil } from "lucide-react";
 import { Button, Form, Label, Modal, Surface } from "@heroui/react";
+import { toast } from "react-toastify";
 
 export default function MyTutorEditModal({ tutor, fetchTutors }) {
   const handleUpdateTutor = async (e, id) => {
@@ -35,7 +36,7 @@ export default function MyTutorEditModal({ tutor, fetchTutors }) {
     const data = await res.json();
 
     if (data.modifiedCount > 0) {
-      alert("Tutor Updated Successfully");
+      toast.success("Tutor Updated Successfully");
       fetchTutors();
     }
   };
