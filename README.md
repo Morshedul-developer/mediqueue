@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏥 MediQueue
 
-## Getting Started
+**MediQueue** is a modern tutor booking and session management platform built with Next.js 16 and React 19. It allows students to browse available tutors, book sessions, and manage their bookings — all from a clean, responsive interface.
 
-First, run the development server:
+🔗 **Live Site:** [https://mediqueue-indol.vercel.app](https://mediqueue-indol.vercel.app)
+
+---
+
+## ✨ Key Features
+
+- 🔐 **Secure Authentication** — Powered by Better Auth with JWT token-based session management, supporting user registration, login, and protected routes.
+- 📋 **Browse Available Tutors** — Students can explore a curated list of tutors with rich profile cards, making it easy to find the right match.
+- 📅 **Book & Manage Sessions** — Users can book tutoring sessions and track all upcoming bookings from a dedicated dashboard.
+- ❌ **Cancel Bookings** — Students have the ability to cancel any active session directly from their bookings page with real-time UI updates.
+- 🌗 **Dark / Light Mode** — Full theme support via `next-themes`, allowing users to switch between dark and light modes seamlessly.
+- 📱 **Fully Responsive Design** — Built with Tailwind CSS v4 and HeroUI v3 for a polished experience across all screen sizes.
+- ⚡ **Optimized Performance** — Leverages Next.js 16 with Turbopack for fast builds and server-side rendering where appropriate.
+
+---
+
+## 🛠️ Tech Stack
+
+| Category       | Technology                          |
+|----------------|--------------------------------------|
+| Framework      | Next.js 16.2.9 (Turbopack)          |
+| UI Library     | React 19                            |
+| Component Kit  | HeroUI v3                           |
+| Styling        | Tailwind CSS v4                     |
+| Authentication | Better Auth + MongoDB Adapter       |
+| Database       | MongoDB                             |
+| Icons          | Lucide React, React Icons           |
+| Animations     | Animate.css, Swiper                 |
+| Deployment     | Vercel                              |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- MongoDB Atlas URI
+- Backend server running (see [mediqueue-server](https://github.com/Morshedul-developer/mediqueue-server))
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Morshedul-developer/mediqueue.git
+cd mediqueue
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+```
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_SERVER_URL=http://localhost:5000
+BETTER_AUTH_SECRET=your_secret_here
+BETTER_AUTH_URL=http://localhost:3000
+MONGODB_URI=your_mongodb_uri_here
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── layout.jsx          # Root layout with providers
+│   ├── page.jsx            # Home page
+│   ├── not-found.jsx       # 404 page
+│   ├── error.jsx           # Error boundary page
+│   └── (routes)/           # Feature-based route folders
+├── components/
+│   ├── Banner.jsx
+│   ├── AvailableTutors.jsx
+│   ├── WhyChoose.jsx
+│   ├── LearningJourney.jsx
+│   └── ui/
+│       └── TutorCard.jsx
+└── lib/
+    └── auth-client.js      # Better Auth client config
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🔗 Related
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Backend Repository:** [mediqueue-server](https://github.com/Morshedul-developer/mediqueue-server)
