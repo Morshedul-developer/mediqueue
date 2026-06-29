@@ -10,7 +10,6 @@ import {
   Wallet,
   Users,
 } from "lucide-react";
-import { Button } from "@heroui/react";
 import BookingSessionModal from "@/components/BookingSessionModal";
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";

@@ -19,6 +19,20 @@ export default function BookingSessionModal({ tutor, fetchTutors }) {
   const handleBookSession = async (e) => {
     e.preventDefault();
 
+    // Current Date
+    const today = new Date();
+
+    // Tutor Session Date
+    const sessionDate = new Date(tutor.sessionStartDate);
+
+    today.setHours(0, 0, 0, 0);
+    sessionDate.setHours(0, 0, 0, 0);
+
+    if (today > sessionDate) {
+      alert("Booking is not available anymore for this tutor.");
+      return;
+    }
+
     const form = e.currentTarget;
 
     const bookingData = {
