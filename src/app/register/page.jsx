@@ -51,25 +51,25 @@ export default function RegisterPage() {
       className="min-h-screen flex items-center justify-center px-4 py-10"
       style={{
         background:
-          "linear-gradient(135deg, #fffbf0 0%, #f0f8ff 60%, #e8f4fd 100%)",
+          "linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 35%, #EEF2FF 100%)",
       }}
     >
       {/* Dashed outer border */}
-      <div className="w-full max-w-105 rounded-[18px] animate__animated animate__fadeIn animate__faster border border-[rgba(253,230,138,0.5)] shadow-lg">
+      <div className="w-full max-w-107.5 overflow-hidden rounded-3xl border border-primary/15 bg-white shadow-2xl animate__animated animate__fadeIn animate__faster">
         <div className="bg-white rounded-[18px] overflow-hidden">
           {/* Brand Bar */}
           <div
             className="text-center py-5 px-6 animate__animated animate__fadeInDown"
             style={{
-              background: "linear-gradient(90deg, #f5f0e8 0%, #fdf6e3 100%)",
-              borderBottom: "1px solid #f0e0b0",
+              background: "linear-gradient(90deg, #eff6ff 0%, #dbeafe 100%)",
+              borderBottom: "1px solid #bfdbfe",
             }}
           >
             <h1
               className="text-[28px] font-extrabold tracking-tight"
-              style={{ color: "#7A5200" }}
+              style={{ color: "#2563eb" }}
             >
-              SunCart
+              MediQueue
             </h1>
           </div>
 
@@ -143,14 +143,7 @@ export default function RegisterPage() {
               <div className="flex gap-2">
                 <Button
                   type="submit"
-                  className="h-11 px-6 rounded-full font-bold text-[#3d2000] transition-all duration-200"
-                  style={{ background: "#F5A623" }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = "#e09520")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.background = "#F5A623")
-                  }
+                  className="h-11 px-6 rounded-full font-bold text-white bg-primary hover:opacity-90 transition-all duration-200"
                 >
                   <Check />
                   Register
@@ -159,7 +152,7 @@ export default function RegisterPage() {
                 <Button
                   type="reset"
                   variant="secondary"
-                  className="h-11 px-6 rounded-full font-semibold text-[#7A5200] border-[1.5px] border-[#F0B429] bg-white transition-all duration-200 hover:bg-[#fff8ec]"
+                  className="h-11 px-6 rounded-full font-semibold border border-primary text-primary bg-white transition-all duration-200 hover:bg-primary hover:text-blue-600"
                 >
                   Reset
                 </Button>
@@ -176,7 +169,7 @@ export default function RegisterPage() {
             {/* Google Button */}
             <Button
               onClick={handleGoogleLogin}
-              className="w-full text-[#333] transition-all duration-200 hover:border-[#F0B429] hover:bg-[#fff8ec] rounded-[10px] h-12"
+              className="w-full h-12 rounded-[10px] text-slate-700 border border-slate-300 hover:border-primary hover:bg-blue-50 transition-all duration-200"
               variant="outline"
               type="button"
             >
@@ -185,12 +178,11 @@ export default function RegisterPage() {
             </Button>
 
             {/* Register Link */}
-            <p className="text-center text-sm text-[#888] mt-6">
+            <p className="mt-6 text-center text-sm text-slate-500">
               Don&apos;t have an account?{" "}
               <Link
                 href="/login"
-                className="font-semibold"
-                style={{ color: "#F0A500" }}
+                className="font-semibold text-primary hover:text-blue-700 transition-colors"
               >
                 Login
               </Link>

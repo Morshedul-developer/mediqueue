@@ -149,7 +149,7 @@ export default function LoginPage() {
                 <Button
                   type="reset"
                   variant="secondary"
-                  className="h-11 px-6 rounded-full font-semibold border border-primary text-primary bg-white transition-all duration-200 hover:bg-primary hover:text-blue-700"
+                  className="h-11 px-6 rounded-full font-semibold border border-primary text-primary bg-white transition-all duration-200 hover:bg-primary hover:text-blue-600"
                 >
                   Reset
                 </Button>
