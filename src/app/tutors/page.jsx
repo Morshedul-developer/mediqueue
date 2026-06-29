@@ -1,5 +1,9 @@
 import TutorCard from "@/components/ui/TutorCard";
 
+export const metadata = {
+  title: "Tutors",
+};
+
 const TutorsPage = async () => {
   const res = await fetch(`http://localhost:5000/tutors`);
   const tutors = await res.json();

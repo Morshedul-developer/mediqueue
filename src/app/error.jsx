@@ -3,6 +3,10 @@
 import { Button } from "@heroui/react";
 import { TriangleAlert, RotateCcw } from "lucide-react";
 
+export const metadata = {
+  title: "Something Went Wrong | MediQueue",
+};
+
 export default function Error({ error, reset }) {
   return (
     <section className="flex min-h-screen items-center justify-center bg-linear-to-br from-red-50 via-white to-orange-50 px-6">
